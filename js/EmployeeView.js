@@ -19,6 +19,7 @@ var EmployeeView = function(employee) {
         navigator.geolocation.getCurrentPosition(
             function(position) {
                 $('.location', this.el).html(position.coords.latitude + ',' + position.coords.longitude);
+                app.showAlert('Location loaded');
             },
             function() {
                 app.showAlert('Error getting location');
@@ -40,6 +41,7 @@ var EmployeeView = function(employee) {
         phoneNumbers[1] = new ContactField('mobile', employee.cellPhone, true); // preferred number
         contact.phoneNumbers = phoneNumbers;
         contact.save();
+        app.showAlert(contact.name+' was added to your contacts');
         return false;
     };
     
@@ -58,6 +60,7 @@ var EmployeeView = function(employee) {
         navigator.camera.getPicture(
             function(imageData) {
                 $('.employee-image', this.el).attr('src', "data:image/jpeg;base64," + imageData);
+                app.showAlert('Employee image updated');
             },
             function() {
                 app.showAlert('Error taking picture', 'Error');    
